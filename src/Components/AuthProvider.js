@@ -7,9 +7,11 @@ const AuthContext = createContext()
 export default AuthContext;
 
 export const AuthProvider = ({children}) => {
-    const BASE_URL = 'http://192.168.245.70:8000'
-    const [username, setUsername] = useState(localStorage.getItem('username') ? localStorage.getItem('username') : null)
-    const [superuser, setSuperuser] = useState(localStorage.getItem('superuser') ? localStorage.getItem('superuser') : false)
+    const BASE_URL = 'http://localhost:8000'
+    // const [username, setUsername] = useState(localStorage.getItem('username') ? localStorage.getItem('username') : null)
+    // const [superuser, setSuperuser] = useState(localStorage.getItem('superuser') ? localStorage.getItem('superuser') : false)
+    const [username, setUsername] = useState(null)
+    const [superuser, setSuperuser] = useState(false)
     const navigate = useNavigate()
 
     /*
@@ -30,8 +32,8 @@ export const AuthProvider = ({children}) => {
             if (message) {
                 return alert(message)
             }
-            localStorage.setItem('username', username)
-            localStorage.setItem('superuser', superuser)
+            // localStorage.setItem('username', username)
+            // localStorage.setItem('superuser', superuser)
             setUsername(username)
             setSuperuser(superuser)
             navigate('/')
@@ -42,8 +44,8 @@ export const AuthProvider = ({children}) => {
     }
 
     const logoutUser = () => {
-        localStorage.removeItem('username')
-        localStorage.removeItem('superuser')
+        // localStorage.removeItem('username')
+        // localStorage.removeItem('superuser')
         setUsername(null)
         setSuperuser(false)
         navigate('/login')

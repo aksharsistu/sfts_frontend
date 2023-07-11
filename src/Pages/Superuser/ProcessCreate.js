@@ -18,7 +18,6 @@ const ProductPage = () => {
     // Run at first render:
     useEffect(() => {
         fetchProcessList();
-        fetchProcessNo();
         fetchProductList();
     }, []);
 
@@ -42,24 +41,11 @@ const ProductPage = () => {
         }
     }
 
-    // Generate a process No
-    const fetchProcessNo = async () => {
-        try {
-            const response = await axios.get(BASE_URL + '/process/number/')
-            const {processNo, startingSNo} = response.data
-            setStartingSNo(startingSNo)
-            setProcessNo(processNo)
-        } catch (error) {
-            console.error('Error', error)
-        }
-    };
-
     // Sends processNo to be deleted:
     const handleDelete = async (processNo) => {
         try {
             await axios.post(BASE_URL + '/process/delete/', processNo)
             await fetchProcessList()
-            await fetchProcessNo()
         } catch (error) {
             console.error('Error: ', error)
             alert('Error updating processes')
@@ -73,12 +59,11 @@ const ProductPage = () => {
             processNo: processNo,
             productName: productName,
             maxQuantity: maxQuantity,
-            startingSNo: startingSNo,
-            endingSNo: startingSNo + maxQuantity,
+            startingSNo: parseInt(startingSNo),
+            endingSNo: parseInt(startingSNo) + parseInt(maxQuantity),
         }
         try {
             await axios.post(BASE_URL + '/process/set/', data)
-            fetchProcessNo()
             setProductName('')
             setMaxQuantity(0)
             await fetchProcessList()
@@ -127,8 +112,20 @@ const ProductPage = () => {
 
             <div className="process-form-container">
                 <h2>Create New Process</h2>
-                <p className="process-no"><strong>Process No.:</strong> {processNo}</p>
                 <form onSubmit={handleProductSubmit}>
+                    <div className="process-form-column">
+                        <label htmlFor="processNo"><strong>Process No.:</strong></label>
+                        <input
+                            type="number"
+                            max={999999}
+                            min={100000}
+                            value={processNo}
+                            onChange={(event) => {
+                                setProcessNo(event.target.value)
+                                setStartingSNo(parseInt(event.target.value + '000000'))
+                            }}
+                        />
+                    </div>
                     <div className="process-form-column">
                         <label htmlFor="productName">Product Name:</label>
                         <select
@@ -164,8 +161,7 @@ const ProductPage = () => {
                             id="startingSNo"
                             className="process-input-field"
                             value={startingSNo}
-                            onChange={(e) => setStartingSNo(e.target.value)}
-                            required
+                            disabled
                         />
                     </div>
 

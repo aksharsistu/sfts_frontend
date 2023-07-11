@@ -31,16 +31,17 @@ const Home = () => {
     // To run on change of processNo:
     useEffect(() => {
         fetchData();
-    }, [processNo]);
+    }, [processNo, options]);
 
     // To run on selection of option:
     useEffect(() => {
+        fetchQuantity();
         fetchBarcodeDisable();
     }, [productName])
 
-    useEffect(()=> {
-        fetchQuantity();
-    }, [processNo, productName])
+    // useEffect(()=> {
+    //     fetchQuantity();
+    // }, [processNo, productName])
 
 
     // Get Stage and Place info:
@@ -128,6 +129,7 @@ const Home = () => {
             setBarcode('')
             setDescription('')
             await fetchQuantity()
+            await fetchOptions()
         } catch (error) {
             console.error(error)
             alert('Error sending data to the server')
