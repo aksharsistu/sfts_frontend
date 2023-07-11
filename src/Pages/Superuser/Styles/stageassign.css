@@ -1,0 +1,110 @@
+.stage-allocation-container {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+    min-height: 89vh;
+}
+
+.table-container,
+.form-container-custom {
+    background: linear-gradient(to top right, #cec7c7, #e7d4b8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.table-container {
+    min-width: 600px;
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.stage-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+th {
+    background-color: #f0f0f0;
+}
+
+.delete-button {
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+}
+
+.form-container-custom {
+    max-width: 400px;
+}
+
+.form-row-custom {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-field-custom {
+    width: 98%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-field-select {
+    width: 102%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.allocate-button-custom {
+    padding: 10px 20px;
+    background-color: rgb(122, 71, 49);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.allocate-button-custom:hover {
+    background-color: rgb(155, 106, 71);
+}
+
+@media (max-width: 1200px) {
+    .stage-allocation-container {
+        flex-direction: column;
+    }
+    .table-container,
+    .form-container-custom {
+        max-width: 90%;
+    }
+}

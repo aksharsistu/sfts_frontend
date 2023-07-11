@@ -1,0 +1,77 @@
+.user-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /*background: linear-gradient(45deg, #ff6b6b, #556270);*/
+}
+
+.user-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-registration-form,
+.user-deletion-form {
+    background: linear-gradient(to top right, #e1dddd, #f8cfcf);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.user-form-row {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.user-fields {
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button.user {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.user:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: #ff0000;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .user-container {
+        flex-direction: column;
+    }
+
+    .user-form-container {
+        flex-wrap: wrap;
+    }
+
+    .user-registration-form,
+    .user-deletion-form {
+        width: 80%;
+        max-width: 400px;
+    }
+}
