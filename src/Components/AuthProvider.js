@@ -7,13 +7,13 @@ const AuthContext = createContext()
 export default AuthContext;
 
 export const AuthProvider = ({children}) => {
-    const BASE_URL = 'http://localhost:8000'
+    const [backendIp, setBackendIp] = useState('192.168.100.248')
     // const [username, setUsername] = useState(localStorage.getItem('username') ? localStorage.getItem('username') : null)
     // const [superuser, setSuperuser] = useState(localStorage.getItem('superuser') ? localStorage.getItem('superuser') : false)
     const [username, setUsername] = useState(null)
     const [superuser, setSuperuser] = useState(false)
     const navigate = useNavigate()
-
+    const BASE_URL = 'http://' + backendIp + ':8000'
     /*
     The Client sends username and password which the backend server verifies
     and responds with JSON containing username and superuser access boolean.
@@ -57,6 +57,8 @@ export const AuthProvider = ({children}) => {
         loginUser: loginUser,
         logoutUser: logoutUser,
         BASE_URL: BASE_URL,
+        backendIp: backendIp,
+        setBackendIp: setBackendIp
     }
 
     return(

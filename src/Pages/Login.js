@@ -3,9 +3,15 @@ import './Styles/login.css'
 import AuthContext from "../Components/AuthProvider";
 
 const Login = () => {
-    const {loginUser} = useContext(AuthContext)
+    const {loginUser, backendIp, setBackendIp} = useContext(AuthContext)
 
-    return (
+    return (<>
+        <div className="backend">
+            <label htmlFor="backendIp">Backend IP Address: (Do not edit!)</label>
+            <span>https://</span>
+            <input type="text" name="backendIp" className='backendIp' value={backendIp} onChange={(e) => setBackendIp(e.target.value)}/>
+            <span>:8000</span>
+        </div>
         <div className="login-container">
             <h1 className="login">Login</h1>
             <form onSubmit={loginUser}>
@@ -22,6 +28,7 @@ const Login = () => {
                 </div>
             </form>
         </div>
+        </>
     )
 }
 

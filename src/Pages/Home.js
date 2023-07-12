@@ -5,7 +5,7 @@ import AuthContext from "../Components/AuthProvider";
 
 const Home = () => {
     // Context Variables:
-    const {BASE_URL, username, superuser} = useContext(AuthContext);
+    const {BASE_URL, username} = useContext(AuthContext);
 
     // State Variables:
     const [message, setMessage] = useState('');
@@ -20,7 +20,7 @@ const Home = () => {
     const [stageQuantity, setStageQuantity] = useState(0)
     const [override, setOverride] = useState(false);
     const [barcodeDisable, setBarcodeDisable] = useState(false);
-    let descriptionDisable = !(stageName === 'RWRK' || stageName.includes('TS') || stageName.includes('PCK') || (stageName &&  placeName === 'qa') || (stageName &&  placeName === 'rework'));
+    let descriptionDisable = !(stageName === 'RWRK' || stageName.includes('TS') || stageName.includes('PCK') || placeName === 'rework');
 
     // To run once:
     useEffect(() => {
@@ -148,6 +148,7 @@ const Home = () => {
                         id="productNo"
                         value={processNo}
                         onChange={(e) => setProcessNo(e.target.value)}
+                        required
                     >
                         <option value="">Select a process</option>
                         {options.map((option, index) => (
@@ -185,6 +186,7 @@ const Home = () => {
                         maxLength={12}
                         onChange={(e) => setBarcode(e.target.value)}
                         disabled={barcodeDisable}
+                        required
                     />
                 </div>
 
@@ -196,7 +198,8 @@ const Home = () => {
                         value={description}
                         maxLength={13}
                         onChange={(e) => setDescription(e.target.value)}
-                        disabled={descriptionDisable || barcodeDisable}
+                        disabled={descriptionDisable || barcodeDisable || !override}
+                        required={!(descriptionDisable || barcodeDisable || !override)}
                     />
                 </div>
 
@@ -206,9 +209,9 @@ const Home = () => {
                             type="checkbox"
                             checked={override}
                             onChange={(e) => setOverride(e.target.checked)}
-                            disabled={!superuser || placeName === 'qa' || placeName ==='rework'}
+                            disabled={!(placeName === 'qa' || placeName ==='end')}
                         />
-                        Override for multiple inputs
+                        Reject (for QA and Inspection-End)
                     </label>
                 </div>
 
@@ -223,9 +226,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/* Notes for tomorrow:
-Figure out quantity at each stage along with quantity for the whole process.
-Write check function for stage in barcode app
-Complete the barcode app to finish the project.
- */
