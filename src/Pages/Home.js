@@ -20,7 +20,7 @@ const Home = () => {
     const [stageQuantity, setStageQuantity] = useState(0)
     const [override, setOverride] = useState(false);
     const [barcodeDisable, setBarcodeDisable] = useState(false);
-    let descriptionDisable = !(stageName === 'RWRK' || stageName.includes('TS') || stageName.includes('PCK') || placeName === 'rework');
+    let descriptionEnable = (stageName === 'RWRK' || stageName.includes('PCK') || placeName === 'rework');
 
     // To run once:
     useEffect(() => {
@@ -198,8 +198,8 @@ const Home = () => {
                         value={description}
                         maxLength={13}
                         onChange={(e) => setDescription(e.target.value)}
-                        disabled={descriptionDisable || barcodeDisable || !override}
-                        required={!(descriptionDisable || barcodeDisable || !override)}
+                        disabled={!((descriptionEnable || override) && !barcodeDisable)}
+                        required={(descriptionEnable || override) && !barcodeDisable}
                     />
                 </div>
 
@@ -209,7 +209,7 @@ const Home = () => {
                             type="checkbox"
                             checked={override}
                             onChange={(e) => setOverride(e.target.checked)}
-                            disabled={!(placeName === 'qa' || placeName ==='end')}
+                            disabled={!(placeName === 'qa' || placeName ==='end' || stageName.includes('TS'))}
                         />
                         Reject (for QA and Inspection-End)
                     </label>
